@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oper8or — Private Equity Executive Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-style: normal; }
+  html { scroll-behavior: smooth; }
+  body { background: #F7F4EF; color: #0A0A0A; font-family: 'Outfit', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 5%; background: #000; position: sticky; top: 0; z-index: 100; gap: 24px; }
+  .logo { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 400; letter-spacing: 0.06em; color: #F5F0E8; flex-shrink: 0; text-decoration: none; }
+  .logo span { color: #FF6B1A; }
+  .nav-spacer { flex: 1; }
+  .nav-r { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+  .nav-link { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.3); font-weight: 400; cursor: pointer; transition: color 0.2s; position: relative; white-space: nowrap; text-decoration: none; }
+  .nav-link::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: #FF6B1A; transition: width 0.25s; }
+  .nav-link:hover { color: rgba(245,240,232,0.8); }
+  .nav-link:hover::after { width: 100%; }
+  .nav-dropdown { position: relative; padding-bottom: 16px; margin-bottom: -16px; }
+  .nav-dropdown-trigger { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.3); font-weight: 400; cursor: pointer; transition: color 0.2s; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .nav-dropdown-trigger span { font-size: 8px; transition: transform 0.2s; display: inline-block; }
+  .nav-dropdown:hover .nav-dropdown-trigger { color: rgba(245,240,232,0.8); }
+  .nav-dropdown:hover .nav-dropdown-trigger span { transform: rotate(180deg); }
+  .nav-dropdown-menu { position: absolute; top: 100%; left: 0; background: #111; min-width: 160px; display: none; flex-direction: column; border-top: 2px solid #FF6B1A; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; }
+  .nav-dropdown-item { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.4); padding: 11px 16px; cursor: pointer; transition: color 0.2s, background 0.2s; white-space: nowrap; border-bottom: 1px solid rgba(255,255,255,0.04); text-decoration: none; display: block; }
+  .nav-dropdown-item:hover { color: #FF6B1A; background: #161616; }
+  .nav-cta { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #000; background: #FF6B1A; padding: 7px 16px; font-weight: 600; cursor: pointer; transition: opacity 0.2s, transform 0.15s; white-space: nowrap; flex-shrink: 0; text-decoration: none; }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero { padding: clamp(60px,7vw,110px) 5% clamp(56px,6vw,90px); border-bottom: 1px solid #E8E3DA; }
+  .hero-pre { font-size: 11px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: #BBB; margin-bottom: clamp(20px,2.5vw,32px); opacity: 0; animation: fadeUp 0.5s 0.1s forwards; }
+  .hero-h { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,5vw,72px); font-weight: 300; line-height: 1.05; margin-bottom: clamp(16px,2vw,28px); opacity: 0; animation: fadeUp 0.7s 0.22s forwards; color: #0A0A0A; }
+  .hero-h .line { display: block; }
+  .hero-h .eight { color: #FF6B1A; }
+  .hero-sub { font-size: clamp(14px,1.1vw,16px); font-weight: 300; color: #888; max-width: min(480px,55%); line-height: 1.8; margin-bottom: clamp(48px,6vw,72px); opacity: 0; animation: fadeUp 0.7s 0.36s forwards; }
+
+  /* CARDS */
+  .cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; max-width: min(960px,88%); opacity: 0; animation: fadeUp 0.6s 0.5s forwards; background: rgba(255,107,26,0.1); }
+  .card { background: #0A0A0A; padding: 24px 22px; cursor: pointer; position: relative; transition: background 0.2s; display: flex; flex-direction: column; justify-content: space-between; min-height: 150px; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #FF6B1A; transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .card:hover { background: #111; }
+  .card:hover::before { transform: scaleX(1); }
+  .card:hover .card-more { opacity: 1; }
+  .card-pre { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #FF6B1A; font-weight: 500; display: block; height: 28px; margin-bottom: 6px; }
+  .card-label { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px,1.5vw,19px); font-weight: 400; color: #F5F0E8; line-height: 1.2; display: block; }
+  .card-more { color: #FF6B1A; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; opacity: 0.4; transition: opacity 0.2s; display: flex; align-items: center; gap: 5px; margin-top: 16px; }
+  .card-more-arrow { transition: transform 0.2s; display: inline-block; }
+  .card:hover .card-more-arrow { transform: translateX(3px); }
+
+  /* TICKER */
+  .ticker { display: flex; align-items: center; border-top: 1px solid #E8E3DA; overflow: hidden; }
+  .ticker-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #000; background: #FF6B1A; padding: 12px 16px; white-space: nowrap; font-weight: 600; flex-shrink: 0; }
+  .ticker-track { display: flex; animation: ticker 20s linear infinite; }
+  .ticker-item { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #C0B8AE; padding: 12px 24px; border-right: 1px solid #E8E3DA; white-space: nowrap; font-weight: 400; }
+
+  /* FOOTER */
+  footer { padding: 16px 5%; background: #000; display: flex; align-items: center; justify-content: space-between; }
+  .foot-logo { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0.06em; color: rgba(245,240,232,0.15); }
+  .foot-logo span { color: rgba(255,107,26,0.3); }
+  .foot-tag { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: rgba(245,240,232,0.15); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .hero-pre, .hero-h, .hero-sub, .cards { transform: translateY(14px); }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .nav-r .nav-link, .nav-r .nav-dropdown { display: none; }
+    .nav-burger { display: flex; flex-direction: column; gap: 4px; cursor: pointer; }
+    .nav-burger span { display: block; width: 20px; height: 1.5px; background: rgba(245,240,232,0.4); }
+    .hero-sub { max-width: 100%; }
+    .cards { grid-template-columns: repeat(2,1fr); max-width: 100%; }
+  }
+  @media (min-width: 641px) {
+    .nav-burger { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Oper<span>8</span>or</a>
+  <div class="nav-spacer"></div>
+  <div class="nav-r">
+    <div class="nav-dropdown">
+      <div class="nav-dropdown-trigger">Solutions <span>▾</span></div>
+      <div class="nav-dropdown-menu">
+        <a href="/thesis" class="nav-dropdown-item">The Thesis</a>
+        <a href="/search" class="nav-dropdown-item">The Process</a>
+      </div>
+    </div>
+    <a href="/network" class="nav-link">The Network</a>
+    <a href="/podcast" class="nav-link">Hello Oper8or</a>
+    <a href="/about" class="nav-link">About</a>
+    <a href="/contact" class="nav-cta">Start a search</a>
+  </div>
+  <div class="nav-burger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-pre">Private Equity Executive Search</div>
+  <h1 class="hero-h">
+    <span class="line">Exceptional Oper<span class="eight">8</span>ors</span>
+    <span class="line">Drive Exceptional Returns.</span>
+  </h1>
+  <p class="hero-sub">We build the leadership teams who execute your value creation plan.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div>
+        <span class="card-pre">Framework</span>
+        <span class="card-label">The Oper8or<br>Thesis</span>
+      </div>
+      <div class="card-more">Learn more <span class="card-more-arrow">→</span></div>
+    </div>
+    <div class="card">
+      <div>
+        <span class="card-pre">Process</span>
+        <span class="card-label">The Oper8or<br>Search</span>
+      </div>
+      <div class="card-more">Learn more <span class="card-more-arrow">→</span></div>
+    </div>
+    <div class="card">
+      <div>
+        <span class="card-pre">Community</span>
+        <span class="card-label">The Oper8or<br>Network</span>
+      </div>
+      <div class="card-more">Learn more <span class="card-more-arrow">→</span></div>
+    </div>
+    <div class="card">
+      <div>
+        <span class="card-pre">The podcast</span>
+        <span class="card-label">Hello,<br>Oper8or</span>
+      </div>
+      <div class="card-more">Learn more <span class="card-more-arrow">→</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-label">Trusted by</div>
+  <div class="ticker-track">
+    <div class="ticker-item">Flexitricity</div>
+    <div class="ticker-item">Bring Energy</div>
+    <div class="ticker-item">Fidra Energy</div>
+    <div class="ticker-item">Schroders Greencoat</div>
+    <div class="ticker-item">I Squared Capital</div>
+    <div class="ticker-item">Swiss Life AM</div>
+    <div class="ticker-item">Flexitricity</div>
+    <div class="ticker-item">Bring Energy</div>
+    <div class="ticker-item">Fidra Energy</div>
+    <div class="ticker-item">Schroders Greencoat</div>
+    <div class="ticker-item">I Squared Capital</div>
+    <div class="ticker-item">Swiss Life AM</div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo">Oper<span>8</span>or</div>
+  <div class="foot-tag">Eight dimensions. One decision.</div>
+</footer>
+
+</body>
+</html>
