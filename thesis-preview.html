@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Oper8or Thesis — Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; font-family: 'Poppins', -apple-system, sans-serif; background: #F7F4EF; }
+
+    /* NAV */
+    nav {
+      background: #000;
+      padding: 0 4rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { font-size: 20px; font-weight: 600; color: #fff; letter-spacing: 0.1em; text-transform: uppercase; }
+    .nav-logo span { color: #FF6B1A; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.6); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-cta { font-size: 12px; font-weight: 500; color: #000; background: #FF6B1A; padding: 0.55rem 1.4rem; text-decoration: none; letter-spacing: 0.05em; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      background: #000;
+      padding: 7rem 4rem 6rem;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #FF6B1A;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: 72px;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.08;
+      margin-bottom: 1.75rem;
+      max-width: 720px;
+    }
+    .hero h1 span { color: #FF6B1A; }
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .orange-rule { width: 48px; height: 2px; background: #FF6B1A; margin-top: 3rem; }
+
+    /* BELIEF SECTION */
+    .belief {
+      background: #F7F4EF;
+      padding: 7rem 4rem;
+    }
+    .belief-inner {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #FF6B1A;
+      margin-bottom: 1rem;
+    }
+    .belief-headline {
+      font-size: 42px;
+      font-weight: 300;
+      color: #000;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+    .body-text {
+      font-size: 16px;
+      font-weight: 300;
+      color: #1a1a1a;
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+    }
+    .body-text strong { font-weight: 500; }
+    .divider { width: 40px; height: 2px; background: #FF6B1A; margin: 2.25rem 0; }
+    .transition-line {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.38);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    /* STATS */
+    .stats-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #FF6B1A;
+      margin-bottom: 1.5rem;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    .stat-card {
+      background: #0A0A0A;
+      padding: 2rem;
+    }
+    .stat-card::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: #FF6B1A;
+      margin-bottom: 1.5rem;
+    }
+    .stat-icon { margin-bottom: 1rem; }
+    .stat-number {
+      font-size: 60px;
+      font-weight: 600;
+      color: #FF6B1A;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 0.75rem;
+    }
+    .stat-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .stat-source {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.22);
+      text-transform: uppercase;
+    }
+    .stats-footnote {
+      margin-top: 1.25rem;
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.28);
+      line-height: 1.6;
+    }
+
+    /* FRAMEWORK TEASER */
+    .framework {
+      background: #fff;
+      padding: 7rem 4rem;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .framework-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 6rem;
+    }
+    .framework-left { flex: 0 0 400px; }
+    .framework-headline {
+      font-size: 36px;
+      font-weight: 300;
+      color: #000;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+    .framework-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.5);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+    .framework-cta {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      background: #000;
+      padding: 0.85rem 1.75rem;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: background 0.2s;
+    }
+    .framework-cta:hover { background: #FF6B1A; }
+    .dims {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.875rem;
+      align-content: start;
+    }
+    .dim-pill {
+      background: #F7F4EF;
+      padding: 1rem 1.1rem;
+      border-left: 2px solid #FF6B1A;
+    }
+    .dim-num {
+      font-size: 10px;
+      font-weight: 600;
+      color: #FF6B1A;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+    .dim-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: #000;
+      line-height: 1.35;
+    }
+
+    /* FOOTER CTA */
+    .footer-cta {
+      background: #000;
+      padding: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-cta-text {
+      font-size: 30px;
+      font-weight: 300;
+      color: #fff;
+    }
+    .footer-cta-text span { color: #FF6B1A; }
+    .footer-cta-btn {
+      font-size: 13px;
+      font-weight: 500;
+      color: #000;
+      background: #FF6B1A;
+      padding: 1rem 2.25rem;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: opacity 0.2s;
+    }
+    .footer-cta-btn:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">OPER<span>8</span>OR</div>
+    <ul class="nav-links">
+      <li><a href="#">Solutions &#9660;</a></li>
+      <li><a href="#" class="active">The Thesis</a></li>
+      <li><a href="#">The Network</a></li>
+      <li><a href="#">Hello Oper8or</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Start a search</a>
+  </nav>
+
+  <section class="hero">
+    <p class="eyebrow">Private Equity Executive Search</p>
+    <h1>The Oper<span>8</span>or<br>Thesis.</h1>
+    <p class="hero-sub">Why the quality of your portfolio company leadership is the most underestimated lever in your value creation plan.</p>
+    <div class="orange-rule"></div>
+  </section>
+
+  <section class="belief">
+    <div class="belief-inner">
+
+      <div class="belief-copy">
+        <p class="section-eyebrow">The belief</p>
+        <h2 class="belief-headline">Your returns are a leadership problem.</h2>
+
+        <p class="body-text">When a portfolio company exits at an exceptional MOIC, the instinct is to credit the deal — the entry price, the timing, the macro tailwind. And those things matter.</p>
+        <p class="body-text">But the most consistent differentiator between a strong exit and an outstanding one is simpler than any of that. <strong>It's who ran the business.</strong></p>
+
+        <div class="divider"></div>
+
+        <p class="body-text">The companies that generate the highest returns are almost always led by operators who understand what investors need from them — and who know how to build, scale, and execute inside a PE-backed environment.</p>
+        <p class="body-text">Not just a capable CEO. The right CFO who can run a tight process and speak the language of the board. A commercial leader who builds revenue in constrained conditions. An operations lead who drives efficiency at pace.</p>
+        <p class="body-text"><strong>The value creation plan lives or dies in the hands of the people running the core functions.</strong></p>
+
+        <div class="divider"></div>
+
+        <p class="body-text">The operators who can genuinely perform inside a PE-backed environment are a small pool. Most investors discover this only when a seat becomes a problem.</p>
+        <p class="body-text">The strongest investors treat leadership as a pre-emptive lever, not a remediation exercise. A mis-hire at CFO or CCO level isn't just a replacement cost — it's six to eighteen months of plan drift, board distraction, and lost momentum at exactly the point where execution speed matters most.</p>
+        <p class="body-text"><strong>Leadership quality isn't a soft consideration. It's a financial one.</strong></p>
+
+        <div class="divider"></div>
+
+        <p class="transition-line">That's the belief that sits behind everything Oper8or does — and why we built a framework for identifying the operators who actually move the needle.</p>
+      </div>
+
+      <div class="belief-stats">
+        <p class="stats-label">The evidence</p>
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="7" r="3.5" stroke="#FF6B1A" stroke-width="1.5"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="stat-number">53%</div>
+            <p class="stat-desc">Average share of investment returns GPs attribute directly to portfolio company leadership quality.</p>
+            <p class="stat-source">Teneo / McKinsey, 2022</p>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <polyline points="4,17 9,11 13,14 20,6" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="16,6 20,6 20,10" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="stat-number">2.5&times;</div>
+            <p class="stat-desc">Higher MOIC for portfolio companies matching the right operators to critical roles from day one.</p>
+            <p class="stat-source">McKinsey Quarterly</p>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="8.5" stroke="#FF6B1A" stroke-width="1.5"/>
+                <polyline points="12,7 12,12.5 15.5,15" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="stat-number">92%</div>
+            <p class="stat-desc">of PE professionals say acting too late on talent directly caused portfolio underperformance.</p>
+            <p class="stat-source">Bain &amp; Company</p>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="8.5" stroke="#FF6B1A" stroke-width="1.5"/>
+                <line x1="8.5" y1="8.5" x2="15.5" y2="15.5" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="15.5" y1="8.5" x2="8.5" y2="15.5" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="stat-number">40%</div>
+            <p class="stat-desc">of C-suite hires fail within 18 months — stalling the plan and compressing the multiple.</p>
+            <p class="stat-source">USC Centre for Executive Succession</p>
+          </div>
+
+        </div>
+        <p class="stats-footnote">Sources: Teneo / McKinsey (2022), McKinsey Quarterly, Bain &amp; Company, University of South Carolina Centre for Executive Succession.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="framework">
+    <div class="framework-inner">
+      <div class="framework-left">
+        <p class="section-eyebrow">The Oper8or Eight</p>
+        <h2 class="framework-headline">Eight dimensions. One framework for identifying operators who deliver.</h2>
+        <p class="framework-sub">We don't rely on intuition or pattern-matching. Every operator we assess is evaluated against eight dimensions that determine whether they can execute inside a PE-backed environment — and drive the returns that follow.</p>
+        <a href="#" class="framework-cta">Explore the framework</a>
+      </div>
+      <div class="dims">
+        <div class="dim-pill"><div class="dim-num">01</div><div class="dim-name">Radical Ownership</div></div>
+        <div class="dim-pill"><div class="dim-num">02</div><div class="dim-name">Investor Fluency</div></div>
+        <div class="dim-pill"><div class="dim-num">03</div><div class="dim-name">Urgency</div></div>
+        <div class="dim-pill"><div class="dim-num">04</div><div class="dim-name">Scar Tissue</div></div>
+        <div class="dim-pill"><div class="dim-num">05</div><div class="dim-name">Leads With Conviction</div></div>
+        <div class="dim-pill"><div class="dim-num">06</div><div class="dim-name">Talent-Obsessed</div></div>
+        <div class="dim-pill"><div class="dim-num">07</div><div class="dim-name">Simplifier</div></div>
+        <div class="dim-pill"><div class="dim-num">08</div><div class="dim-name">Risk-Aware Not Risk-Averse</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-cta">
+    <div class="footer-cta-text">Ready to find your next <span>Oper8or?</span></div>
+    <a href="#" class="footer-cta-btn">START A SEARCH</a>
+  </div>
+
+</body>
+</html>
