@@ -75,31 +75,31 @@
       overflow: hidden;
       min-height: 580px;
     }
-    /* Layer 1: the photo — much brighter now */
+
+    /* Fade-in keyframe */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Layer 1: the photo */
     .hero-right .img-layer {
       position: absolute;
       inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=1200&q=80');
+      background-image: url('Operator%20Thesis%20Image.png');
       background-size: cover;
       background-position: center top;
       filter: grayscale(100%) brightness(0.8);
       z-index: 0;
+      opacity: 0;
+      animation: fadeIn 1.4s ease-in 0.3s forwards;
     }
-    /* Layer 2: lighter gradient — just enough to blend the left edge into black */
+    /* Layer 2: gradient to blend left edge into black */
     .hero-right .fade-layer {
       position: absolute;
       inset: 0;
       background: linear-gradient(to right, #000 0%, rgba(0,0,0,0.3) 25%, rgba(0,0,0,0) 60%);
       z-index: 1;
-    }
-    .hero-image-credit {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      font-size: 9px;
-      color: rgba(255,255,255,0.25);
-      z-index: 2;
-      letter-spacing: 0.04em;
     }
 
     /* BELIEF SECTION */
@@ -288,7 +288,6 @@
     <div class="hero-right">
       <div class="img-layer"></div>
       <div class="fade-layer"></div>
-      <span class="hero-image-credit">Photo: Unsplash</span>
     </div>
   </section>
 
