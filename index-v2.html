@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oper8or — Private Equity Executive Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-style: normal; }
+  html { scroll-behavior: smooth; }
+  body { background: #F7F4EF; color: #0A0A0A; font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { display: flex; align-items: center; padding: 0 7%; background: #000; position: sticky; top: 0; z-index: 100; height: 80px; gap: 32px; }
+  .logo { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 600; letter-spacing: 0.04em; color: #F5F0E8; text-decoration: none; flex-shrink: 0; }
+  .logo span { color: #FF6B1A; }
+  .nav-spacer { flex: 1; }
+  .nav-r { display: flex; align-items: center; gap: 36px; }
+  .nav-link { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,232,0.5); font-weight: 500; text-decoration: none; position: relative; white-space: nowrap; transition: color 0.2s; }
+  .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #FF6B1A; transition: width 0.25s; }
+  .nav-link:hover { color: #F5F0E8; }
+  .nav-link:hover::after { width: 100%; }
+  .nav-dropdown { position: relative; padding-bottom: 20px; margin-bottom: -20px; }
+  .nav-dropdown-trigger { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,232,0.5); font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: color 0.2s; white-space: nowrap; }
+  .nav-dropdown-trigger span { font-size: 9px; transition: transform 0.2s; }
+  .nav-dropdown:hover .nav-dropdown-trigger { color: #F5F0E8; }
+  .nav-dropdown:hover .nav-dropdown-trigger span { transform: rotate(180deg); }
+  .nav-dropdown-menu { position: absolute; top: 100%; left: 0; background: #111; min-width: 200px; display: none; flex-direction: column; border-top: 2px solid #FF6B1A; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; }
+  .nav-dropdown-item { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,232,0.45); padding: 14px 20px; text-decoration: none; display: block; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s, background 0.2s; }
+  .nav-dropdown-item:hover { color: #FF6B1A; background: #161616; }
+  .nav-cta { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #000; background: #FF6B1A; padding: 13px 28px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity 0.2s, transform 0.15s; }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+  .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .nav-burger span { display: block; width: 24px; height: 2px; background: rgba(245,240,232,0.5); }
+
+  /* HERO — double height, split layout */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 7% 100px;
+    border-bottom: 1px solid #E0DBD3;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80&fit=crop&crop=right');
+    background-size: cover; background-position: right center;
+    animation: imgDrift 16s ease-in-out infinite alternate;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, #F7F4EF 38%, rgba(247,244,239,0.93) 52%, rgba(247,244,239,0.5) 72%, rgba(247,244,239,0.1) 100%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 780px; }
+
+  .hero-pre {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #FF6B1A;
+    margin-bottom: 48px;
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.5s 0.1s forwards;
+  }
+
+  .hero-h {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(52px, 7vw, 110px);
+    font-weight: 300;
+    line-height: 1.0;
+    color: #0A0A0A;
+    margin-bottom: 48px;
+    letter-spacing: -0.02em;
+    opacity: 0; transform: translateY(18px);
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero-h .line { display: block; }
+  .hero-h .eight { color: #FF6B1A; }
+
+  .hero-sub {
+    font-size: clamp(18px, 1.6vw, 24px);
+    font-weight: 400;
+    color: #555;
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 80px;
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.7s 0.35s forwards;
+  }
+
+  /* CARDS — full width, below fold */
+  .cards-section {
+    position: relative;
+    z-index: 1;
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.6s 0.5s forwards;
+  }
+  .cards-label {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #FF6B1A;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    width: 100%;
+    background: rgba(255,107,26,0.1);
+  }
+  .card {
+    background: #0A0A0A;
+    padding: 40px 32px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+  }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #FF6B1A; transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .card:hover { background: #141414; }
+  .card:hover::before { transform: scaleX(1); }
+  .card:hover .card-more { opacity: 1; }
+  .card-pre { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: #FF6B1A; font-weight: 600; display: block; margin-bottom: 16px; }
+  .card-label { font-family: 'Poppins', sans-serif; font-size: clamp(20px, 2vw, 26px); font-weight: 600; color: #F5F0E8; line-height: 1.2; display: block; }
+  .card-desc { font-size: 13px; font-weight: 400; color: rgba(245,240,232,0.4); line-height: 1.6; margin-top: 12px; display: block; }
+  .card-more { color: #FF6B1A; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; opacity: 0.4; transition: opacity 0.2s; display: flex; align-items: center; gap: 6px; margin-top: 24px; }
+  .card-more-arrow { transition: transform 0.2s; display: inline-block; }
+  .card:hover .card-more-arrow { transform: translateX(4px); }
+
+  /* TICKER */
+  .ticker { display: flex; align-items: center; border-top: 1px solid #E0DBD3; overflow: hidden; }
+  .ticker-label { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #000; background: #FF6B1A; padding: 20px 28px; white-space: nowrap; font-weight: 600; flex-shrink: 0; }
+  .ticker-track { display: flex; animation: ticker 24s linear infinite; }
+  .ticker-item { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #999; padding: 20px 40px; border-right: 1px solid #E0DBD3; white-space: nowrap; font-weight: 500; }
+
+  /* FOOTER */
+  footer { padding: 32px 7%; background: #000; display: flex; align-items: center; justify-content: space-between; }
+  .foot-logo { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; color: rgba(245,240,232,0.2); }
+  .foot-logo span { color: rgba(255,107,26,0.35); }
+  .foot-tag { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 300; color: rgba(245,240,232,0.2); }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes imgDrift { 0% { transform: scale(1.03) translateX(0); } 100% { transform: scale(1.05) translateX(-0.8%); } }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  @media (max-width: 768px) {
+    .nav-r .nav-link, .nav-r .nav-dropdown, .nav-r .nav-cta { display: none; }
+    .nav-burger { display: flex; }
+    .hero { padding: 80px 5% 60px; min-height: auto; }
+    .hero-overlay { background: linear-gradient(to right, #F7F4EF 60%, rgba(247,244,239,0.85) 100%); }
+    .hero-sub { max-width: 100%; }
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .card-desc { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Oper<span>8</span>or</a>
+  <div class="nav-spacer"></div>
+  <div class="nav-r">
+    <div class="nav-dropdown">
+      <div class="nav-dropdown-trigger">Solutions <span>▾</span></div>
+      <div class="nav-dropdown-menu">
+        <a href="/thesis" class="nav-dropdown-item">The Thesis</a>
+        <a href="/search" class="nav-dropdown-item">The Process</a>
+      </div>
+    </div>
+    <a href="/network" class="nav-link">The Network</a>
+    <a href="/podcast" class="nav-link">Hello Oper8or</a>
+    <a href="/about" class="nav-link">About</a>
+    <a href="/contact" class="nav-cta">Start a search</a>
+  </div>
+  <div class="nav-burger"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-pre">Private Equity Executive Search</div>
+    <h1 class="hero-h">
+      <span class="line">Exceptional Oper<span class="eight">8</span>ors</span>
+      <span class="line">Drive Exceptional</span>
+      <span class="line">Returns.</span>
+    </h1>
+    <p class="hero-sub">We build the leadership teams who execute your value creation plan.</p>
+
+    <div class="cards-section">
+      <div class="cards-label">Explore</div>
+      <div class="cards">
+        <div class="card">
+          <div>
+            <span class="card-pre">Framework</span>
+            <span class="card-label">The Oper8or<br>Thesis</span>
+            <span class="card-desc">What makes a genuine operator — and how we identify them.</span>
+          </div>
+          <div class="card-more">Learn more <span class="card-more-arrow">→</span></div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-pre">Process</span>
+            <span class="card-label">The Oper8or<br>Search</span>
+            <span class="card-desc">Eight stages from brief to close, built for PE timelines.</span>
+          </div>
+          <div class="card-more">Learn more <span class="card-more-arrow">→</span></div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-pre">Community</span>
+            <span class="card-label">The Oper8or<br>Network</span>
+            <span class="card-desc">A private community of senior operators in energy and infrastructure.</span>
+          </div>
+          <div class="card-more">Learn more <span class="card-more-arrow">→</span></div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-pre">The Podcast</span>
+            <span class="card-label">Hello,<br>Oper8or</span>
+            <span class="card-desc">Conversations with the leaders who build and run the assets.</span>
+          </div>
+          <div class="card-more">Learn more <span class="card-more-arrow">→</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-label">Trusted by</div>
+  <div class="ticker-track">
+    <div class="ticker-item">Flexitricity</div>
+    <div class="ticker-item">Bring Energy</div>
+    <div class="ticker-item">Fidra Energy</div>
+    <div class="ticker-item">Schroders Greencoat</div>
+    <div class="ticker-item">I Squared Capital</div>
+    <div class="ticker-item">Swiss Life AM</div>
+    <div class="ticker-item">Flexitricity</div>
+    <div class="ticker-item">Bring Energy</div>
+    <div class="ticker-item">Fidra Energy</div>
+    <div class="ticker-item">Schroders Greencoat</div>
+    <div class="ticker-item">I Squared Capital</div>
+    <div class="ticker-item">Swiss Life AM</div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo">Oper<span>8</span>or</div>
+  <div class="foot-tag">Eight dimensions. One decision.</div>
+</footer>
+
+</body>
+</html>
