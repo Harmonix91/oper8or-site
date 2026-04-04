@@ -13,7 +13,7 @@
   body { background: #F7F4EF; color: #0A0A0A; font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; }
 
   /* NAV */
-  nav { display: flex; align-items: center; padding: 0 7%; background: #000; position: sticky; top: 0; z-index: 100; height: 80px; gap: 32px; }
+  nav { display: flex; align-items: center; padding: 0 6%; background: #000; position: sticky; top: 0; z-index: 100; height: 80px; gap: 32px; }
   .logo { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 600; letter-spacing: 0.04em; color: #F5F0E8; text-decoration: none; flex-shrink: 0; }
   .logo span { color: #FF6B1A; }
   .nav-spacer { flex: 1; }
@@ -36,16 +36,16 @@
   .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
   .nav-burger span { display: block; width: 24px; height: 2px; background: rgba(245,240,232,0.5); }
 
-  /* HERO — double height, split layout */
+  /* HERO */
   .hero {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 140px 7% 100px;
+    padding: 0 6%;
     border-bottom: 1px solid #E0DBD3;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .hero-bg {
     position: absolute; inset: 0;
@@ -55,28 +55,48 @@
   }
   .hero-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to right, #F7F4EF 38%, rgba(247,244,239,0.93) 52%, rgba(247,244,239,0.5) 72%, rgba(247,244,239,0.1) 100%);
+    background: linear-gradient(
+      to right,
+      #F7F4EF 30%,
+      rgba(247,244,239,0.9) 48%,
+      rgba(247,244,239,0.4) 68%,
+      rgba(247,244,239,0.05) 100%
+    );
   }
-  .hero-content { position: relative; z-index: 1; max-width: 780px; }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 120px 0 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0;
+    align-items: start;
+  }
 
+  /* Left column — pre-header + headline */
+  .hero-left {
+    grid-column: 1;
+    grid-row: 1;
+    padding-right: 60px;
+  }
   .hero-pre {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #FF6B1A;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
     opacity: 0; transform: translateY(12px);
     animation: fadeUp 0.5s 0.1s forwards;
+    line-height: 1.4;
   }
-
   .hero-h {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(52px, 7vw, 110px);
+    font-size: clamp(40px, 5vw, 76px);
     font-weight: 300;
-    line-height: 1.0;
+    line-height: 1.05;
     color: #0A0A0A;
-    margin-bottom: 48px;
     letter-spacing: -0.02em;
     opacity: 0; transform: translateY(18px);
     animation: fadeUp 0.7s 0.2s forwards;
@@ -84,58 +104,70 @@
   .hero-h .line { display: block; }
   .hero-h .eight { color: #FF6B1A; }
 
+  /* Right column — sub-copy, sits opposite the headline */
+  .hero-right {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: flex-end;
+    padding-left: 40px;
+    padding-top: 80px; /* aligns sub-copy with bottom of headline */
+  }
   .hero-sub {
-    font-size: clamp(18px, 1.6vw, 24px);
-    font-weight: 400;
-    color: #555;
-    max-width: 560px;
-    line-height: 1.8;
-    margin-bottom: 80px;
+    font-size: clamp(19px, 1.7vw, 26px);
+    font-weight: 300;
+    color: #444;
+    line-height: 1.75;
+    border-left: 2px solid #FF6B1A;
+    padding-left: 28px;
     opacity: 0; transform: translateY(12px);
-    animation: fadeUp 0.7s 0.35s forwards;
+    animation: fadeUp 0.7s 0.4s forwards;
   }
 
-  /* CARDS — full width, below fold */
+  /* Cards — full width, own row below both columns */
   .cards-section {
     position: relative;
     z-index: 1;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding-top: 72px;
     opacity: 0; transform: translateY(12px);
-    animation: fadeUp 0.6s 0.5s forwards;
+    animation: fadeUp 0.6s 0.55s forwards;
   }
   .cards-label {
     font-size: 11px;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: #FF6B1A;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
   .cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
+    gap: 3px;
     width: 100%;
     background: rgba(255,107,26,0.1);
   }
   .card {
     background: #0A0A0A;
-    padding: 40px 32px;
+    padding: 44px 36px;
     cursor: pointer;
     position: relative;
     transition: background 0.2s;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 220px;
+    min-height: 240px;
   }
   .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #FF6B1A; transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
   .card:hover { background: #141414; }
   .card:hover::before { transform: scaleX(1); }
   .card:hover .card-more { opacity: 1; }
-  .card-pre { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: #FF6B1A; font-weight: 600; display: block; margin-bottom: 16px; }
+  .card-pre { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: #FF6B1A; font-weight: 600; display: block; margin-bottom: 18px; }
   .card-label { font-family: 'Poppins', sans-serif; font-size: clamp(20px, 2vw, 26px); font-weight: 600; color: #F5F0E8; line-height: 1.2; display: block; }
-  .card-desc { font-size: 13px; font-weight: 400; color: rgba(245,240,232,0.4); line-height: 1.6; margin-top: 12px; display: block; }
-  .card-more { color: #FF6B1A; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; opacity: 0.4; transition: opacity 0.2s; display: flex; align-items: center; gap: 6px; margin-top: 24px; }
+  .card-desc { font-size: 13px; font-weight: 400; color: rgba(245,240,232,0.38); line-height: 1.65; margin-top: 14px; display: block; }
+  .card-more { color: #FF6B1A; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; opacity: 0.4; transition: opacity 0.2s; display: flex; align-items: center; gap: 6px; margin-top: 28px; }
   .card-more-arrow { transition: transform 0.2s; display: inline-block; }
   .card:hover .card-more-arrow { transform: translateX(4px); }
 
@@ -146,7 +178,7 @@
   .ticker-item { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #999; padding: 20px 40px; border-right: 1px solid #E0DBD3; white-space: nowrap; font-weight: 500; }
 
   /* FOOTER */
-  footer { padding: 32px 7%; background: #000; display: flex; align-items: center; justify-content: space-between; }
+  footer { padding: 32px 6%; background: #000; display: flex; align-items: center; justify-content: space-between; }
   .foot-logo { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.04em; color: rgba(245,240,232,0.2); }
   .foot-logo span { color: rgba(255,107,26,0.35); }
   .foot-tag { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 300; color: rgba(245,240,232,0.2); }
@@ -155,14 +187,17 @@
   @keyframes imgDrift { 0% { transform: scale(1.03) translateX(0); } 100% { transform: scale(1.05) translateX(-0.8%); } }
   @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .nav-r .nav-link, .nav-r .nav-dropdown, .nav-r .nav-cta { display: none; }
     .nav-burger { display: flex; }
-    .hero { padding: 80px 5% 60px; min-height: auto; }
-    .hero-overlay { background: linear-gradient(to right, #F7F4EF 60%, rgba(247,244,239,0.85) 100%); }
-    .hero-sub { max-width: 100%; }
+    .hero-content { grid-template-columns: 1fr; padding: 80px 0 60px; }
+    .hero-left { padding-right: 0; }
+    .hero-right { grid-column: 1; grid-row: 2; padding-left: 0; padding-top: 40px; }
+    .hero-sub { border-left: none; padding-left: 0; border-top: 2px solid #FF6B1A; padding-top: 24px; }
+    .cards-section { grid-row: 3; }
     .cards { grid-template-columns: repeat(2, 1fr); }
     .card-desc { display: none; }
+    .hero-overlay { background: linear-gradient(to right, #F7F4EF 60%, rgba(247,244,239,0.85) 100%); }
   }
 </style>
 </head>
@@ -191,14 +226,23 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-pre">Private Equity Executive Search</div>
-    <h1 class="hero-h">
-      <span class="line">Exceptional Oper<span class="eight">8</span>ors</span>
-      <span class="line">Drive Exceptional</span>
-      <span class="line">Returns.</span>
-    </h1>
-    <p class="hero-sub">We build the leadership teams who execute your value creation plan.</p>
 
+    <!-- Left — pre-header + headline -->
+    <div class="hero-left">
+      <div class="hero-pre">Private Equity Executive Search</div>
+      <h1 class="hero-h">
+        <span class="line">Exceptional Oper<span class="eight">8</span>ors</span>
+        <span class="line">Drive Exceptional</span>
+        <span class="line">Returns.</span>
+      </h1>
+    </div>
+
+    <!-- Right — sub-copy, sits beside the headline with orange left rule -->
+    <div class="hero-right">
+      <p class="hero-sub">We build the leadership teams who execute your value creation plan.</p>
+    </div>
+
+    <!-- Full-width cards below both -->
     <div class="cards-section">
       <div class="cards-label">Explore</div>
       <div class="cards">
@@ -236,6 +280,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
